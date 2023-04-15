@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="styles.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+<main>
+    <form class="form" action="/login" method="post">
+        <p class="form-title">Sign in to your account</p>
+        <div class="input-container">
+            <input placeholder="Enter email" type="email" name="email" required>
+            <span><ion-icon name="at-outline"></ion-icon></span>
+        </div>
+        <div class="input-container">
+            <input placeholder="Enter password" type="password" name="password" required>
+            <span><ion-icon name="lock-closed-outline"></ion-icon></span>
+        </div>
+        <div>
+            <button class="submit" type="submit">Sign in</button>
+        </div>
+        <div>
+            <p class="message">
+                <span th:if="${message == 'signup_success'}">Registration successful. Please enter your email and password to login.</span>
+                <span th:if="${message == 'login_failed'}">Unable to log in with this username and password. Please check and try again.</span>
+            </p>
+        </div>
+        <p class="signup-link">Don't have an account?<a href="/register"> Sign up</a></p>
+    </form>
+</main>
+</body>
+</html>

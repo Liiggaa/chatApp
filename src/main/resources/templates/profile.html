@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link href="/styles.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+<div class="sidebar">
+    <div class="profile-img-container">
+<div>
+    <img class="profile-photo" alt="profile picture"
+         th:src="${user.getProfilePictureUrl().isEmpty() ? 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049__340.png': user.getProfilePictureUrl()}"
+         width="80" height="80" style="object-fit: cover;"/>
+</div>
+    <div class="userName-box">
+        <p class="userName"><span class="id" th:text="${user.userName}"></span></p>
+    </div>
+        <div class="flex">
+           <ion-icon class="sidebar-icon" name="location-outline"></ion-icon>
+            <p class="location" th:text="${user.location}"></p>
+        </div>
+</div>
+    <div class="link-container">
+        <div class="grid">
+            <ion-icon class="sidebar-icon" name="person-circle-outline"></ion-icon>
+            <a class="sidebar-link" th:href="@{/profile/{id} (id=${userId})}">Profile</a>
+        </div>
+        <div class="grid">
+            <ion-icon class="sidebar-icon" name="chatbox-ellipses-outline"></ion-icon>
+            <a class="sidebar-link" th:href="@{/group-chat/{id} (id=${userId})}">Chat</a>
+        </div>
+        <div class="grid">
+            <ion-icon class="sidebar-icon" name="log-out-outline"></ion-icon>
+            <a class="sidebar-link" th:href="@{/}">Log out</a>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <form class="profile-form" method="post" th:action="@{/profile/{userId}(userId=${userId})}">
+        <div class="prof-box">
+            <div class="profile-photo-container">
+                <img class="profile-photo" alt="profile picture"
+                     th:src="${user.getProfilePictureUrl().isEmpty() ? 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049__340.png': user.getProfilePictureUrl()}"
+                     width="180" height="180" style="object-fit: cover;"/>
+                <div class="user-box">
+                    <p class="user">Welcome, <span class="id" th:text="${user.fullName}"></span>!</p>
+                </div>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="container-1">
+                <div class="input-box">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" name="fullName" id="fullName" required th:value="${user.fullName}"> <!-- fill input values from java code, prefill values-->
+                </div>
+                <div class="input-box">
+                    <label for="userName">Username</label>
+                    <input type="text" name="userName" id="userName" minLength="4" required th:value="${user.userName}">
+                </div>
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required th:value="${user.email}">
+                </div>
+            </div>
+                <div class="container-1">
+                <div class="input-box">
+                    <label for="location">Location</label>
+                    <input type="text" name="location" id="location" required th:value="${user.location}">
+                </div>
+                <div class="input-box">
+                    <label for="dateOfBirth">Date of birth</label>
+                    <input type="date" name="dateOfBirth" id="dateOfBirth"required th:value="${user.dateOfBirth}">
+                </div>
+                <div class="input-box">
+                    <label for="profilePicture">Profile picture url</label>
+                    <input type="url" name="profilePictureUrl"  id="profilePicture" th:value="${user.profilePictureUrl}">
+                </div>
+            </div>
+        </div>
+            <p class="update-message"><span th:if="${profileUpdateMessage == 'profile_updated'}">Profile information successfully updated.</span>
+                <span th:if="${profileUpdateMessage == 'profile_update_failed'}">Profile information update failed.</span>
+                <span th:if="${param.error}" th:text="${param.error}"></span></p>
+        <button class="upd-btn">Update Account</button>
+        <p class="password-link"><a class="password-link" th:href="@{/profile/{id}/changePassword (id=${userId})}">Change password</a></p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Group-chat</title>
+  <link href="/styles.css" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="profile-img-container">
+    <div>
+      <img class="profile-photo" alt="profile picture"
+           th:src="${user.getProfilePictureUrl().isEmpty() ? 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049__340.png': user.getProfilePictureUrl()}"
+           width="80" height="80" style="object-fit: cover;"/>
+    </div>
+    <div class="userName-box">
+      <p class="userName"><span class="id" th:text="${user.userName}"></span></p>
+    </div>
+    <div class="flex">
+      <ion-icon class="sidebar-icon" name="location-outline"></ion-icon>
+      <p class="location" th:text="${user.location}"></p>
+    </div>
+  </div>
+  <div class="link-container">
+    <div class="grid">
+      <ion-icon class="sidebar-icon" name="person-circle-outline"></ion-icon>
+      <a class="sidebar-link" th:href="@{/profile/{id} (id=${userId})}">Profile</a>
+    </div>
+    <div class="grid">
+      <ion-icon class="sidebar-icon" name="chatbox-ellipses-outline"></ion-icon>
+      <a class="sidebar-link" th:href="@{/group-chat/{id} (id=${userId})}">Chat</a>
+    </div>
+    <div class="grid">
+      <ion-icon class="sidebar-icon" name="log-out-outline"></ion-icon>
+        <a class="sidebar-link" th:href="@{/}">Log out</a>
+    </div>
+  </div>
+</div>
+<div class="main-content">
+  <div class="chat-header">
+    <p>Welcome to chat, <span th:text="${user.getUserName()}"></span>.</p>
+  </div>
+  <div class="chat-container">
+  <section th:if="${chats}">
+    <div th:each="chat : ${chats}">
+      <div class="flex-between">
+      <div class="flex-2">
+        <img class="chat-img" alt="profile picture"
+             th:src="${chat.getUser()?.getProfilePictureUrl().isEmpty() ? 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049__340.png': chat.getUser()?.getProfilePictureUrl()}"
+             width="40" height="40" style="object-fit: cover;"/>
+      <div th:if="${chat.getUser()}"></div>
+        <b th:text="${chat.getUser()?.getUserName()}"></b>
+      </div>
+        <div th:text="${#dates.format(chat.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></div>
+      </div>
+      <p class="text-box" th:utext="${chat.getMessage()}"></p>
+    </div>
+  </section>
+</div>
+    <form method="post" th:action="${'/group-chat/'+ user.getId()}">
+      <div class="message-area-box">
+          <div class="message-input-box">
+              <textarea class="message-input" name="message"></textarea>
+              <button class="message-btn"><ion-icon class="send-icon" name="paper-plane-outline"></ion-icon></button>
+          </div>
+          </div>
+      <div>
+        <input type="hidden" th:value="${user.getId()}" name="user">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
