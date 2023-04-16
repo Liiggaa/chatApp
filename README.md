@@ -48,7 +48,7 @@
 
  *Change Password page*
 <div>
-  <img src="images/profile-1-changePassword.png alt="Screenshot of Change password page" width="600" style="display: inline-block;">
+  <img src="images/profile-1-changePassword.png" alt="Screenshot of Change password page" width="600" style="display: inline-block;">
 </div>
 
 
