@@ -21,6 +21,37 @@
 
 ## Project screenshots:
 
+*Home page*
+<div>
+  <img src="images/index-html" alt="Screenshot of Home page" width="600" style="display: inline-block;">
+ </div>
+ 
+ *Registration page*
+<div>
+  <img src="images/register" alt="Screenshot of Registration page" width="600" style="display: inline-block;">
+</div>
+
+ *Login page*
+<div>
+  <img src="images/login" alt="Screenshot of Login page" width="600" style="display: inline-block;">
+</div>
+
+ *Chat page*
+<div>
+  <img src="images/group-chat-1" alt="Screenshot of Group chat page" width="600" style="display: inline-block;">
+</div>
+
+ *Profile/Profile update page*
+<div>
+  <img src="images/profile-1" alt="Screenshot of Profile page" width="600" style="display: inline-block;">
+</div>
+
+ *Change Password page*
+<div>
+  <img src="images/profile-1-changePassword" alt="Screenshot of Change password page" width="600" style="display: inline-block;">
+</div>
+
+
 ## Setup Instructions:
 
 * Import the project into your preferred Java IDE.
